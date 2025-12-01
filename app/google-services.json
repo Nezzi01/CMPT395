@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "268793426626",
+    "project_id": "deferalapp",
+    "storage_bucket": "deferalapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268793426626:android:778e15a3280d04c78f415b",
+        "android_client_info": {
+          "package_name": "com.example.deferralapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE3pxumUXkR9Rov_bw3sA6RbRgIsDhbRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
