@@ -1,4 +1,4 @@
-package com.cmpt395.deferralapp
+package com.cmpt395.deferralapp.ui.screens
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -27,7 +27,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.cmpt395.deferralapp.ui.theme.SettingsTheme
+import com.cmpt395.deferralapp.R
+import com.cmpt395.deferralapp.ui.theme.DeferralAppTheme
 import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            SettingsTheme {
+            DeferralAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     SettingsList(
                         modifier = Modifier.padding(innerPadding)
@@ -119,7 +120,7 @@ fun SettingsToggle(
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    SettingsTheme {
+    DeferralAppTheme {
         SettingsList()
     }
 }
