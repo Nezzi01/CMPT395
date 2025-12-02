@@ -1,4 +1,4 @@
-package com.cmpt395.ui.ui.theme
+package com.cmpt395.deferralapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

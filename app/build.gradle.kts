@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.cmpt395"
+    namespace = "com.cmpt395.deferralapp"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.cmpt395"
+        applicationId = "com.cmpt395.deferralapp"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

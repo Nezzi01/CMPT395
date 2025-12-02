@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_dark_mode">Dark Mode</string>
+    <string name="settings_screen_reader">Screen Reader</string>
+    <string name="settings_font_size">Text Scaling</string>
+</resources>
