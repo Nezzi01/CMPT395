@@ -28,7 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cmpt395.deferralapp.ui.theme.SettingsTheme
-import com.cmpt395.R
 import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
