@@ -1,4 +1,4 @@
-package com.cmpt395.ui
+package com.cmpt395.deferralapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -27,7 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.cmpt395.ui.ui.theme.SettingsTheme
+import com.cmpt395.deferralapp.ui.theme.SettingsTheme
 import com.cmpt395.R
 import kotlin.math.roundToInt
 
