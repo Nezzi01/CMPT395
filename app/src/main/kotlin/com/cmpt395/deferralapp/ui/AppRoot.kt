@@ -9,17 +9,21 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.cmpt395.deferralapp.model.UserRole
 import com.cmpt395.deferralapp.state.DeferralAppState
+import com.cmpt395.deferralapp.state.SettingsManager
 import com.cmpt395.deferralapp.ui.components.AppTopBar
 import com.cmpt395.deferralapp.ui.navigation.Screen
 import com.cmpt395.deferralapp.ui.screens.*
 import com.cmpt395.deferralapp.ui.theme.DeferralAppTheme
 
 @Composable
-fun AppRoot() {
+fun AppRoot(
+    settingsManager: SettingsManager,
+    useDarkMode: Boolean
+) {
     val appState = remember { DeferralAppState() }
     val navController = rememberNavController()
 
-    DeferralAppTheme {
+    DeferralAppTheme(darkTheme = useDarkMode) {
 
         NavHost(
             navController = navController,
@@ -59,23 +63,25 @@ fun AppRoot() {
             /*           AUTHENTICATED AREA WITH AppTopBar + Drawer        */
             /* ------------------------------------------------------------ */
 
+            val sideMenuNavHandler: (String) -> Unit = {
+                when (it) {
+                    "Home" -> navController.navigate(Screen.Home.route)
+                    "Messages" -> navController.navigate(Screen.Messages.route)
+                    "Account" -> navController.navigate(Screen.Account.route)
+                    "Settings" -> navController.navigate(Screen.Settings.route)
+                    "Logout" -> {
+                        appState.logout()
+                        navController.navigate(Screen.RoleSelect.route) {
+                            popUpTo(0)
+                        }
+                    }
+                }
+            }
+
             composable(Screen.Home.route) {
                 AppTopBar(
                     title = "Differ",
-                    onMenuItemClick = { item ->
-                        when (item) {
-                            "Home" -> navController.navigate(Screen.Home.route)
-                            "Messages" -> navController.navigate(Screen.Messages.route)
-                            "Account" -> navController.navigate(Screen.Account.route)
-                            "Settings" -> navController.navigate(Screen.Settings.route)
-                            "Logout" -> {
-                                appState.logout()
-                                navController.navigate(Screen.RoleSelect.route) {
-                                    popUpTo(0)
-                                }
-                            }
-                        }
-                    }
+                    onMenuItemClick = sideMenuNavHandler
                 ) {
                     HomeRouterScreen(appState, navController)
                 }
@@ -84,20 +90,7 @@ fun AppRoot() {
             composable(Screen.Messages.route) {
                 AppTopBar(
                     title = "Messages",
-                    onMenuItemClick = { item ->
-                        when (item) {
-                            "Home" -> navController.navigate(Screen.Home.route)
-                            "Messages" -> {}
-                            "Account" -> navController.navigate(Screen.Account.route)
-                            "Settings" -> navController.navigate(Screen.Settings.route)
-                            "Logout" -> {
-                                appState.logout()
-                                navController.navigate(Screen.RoleSelect.route) {
-                                    popUpTo(0)
-                                }
-                            }
-                        }
-                    }
+                    onMenuItemClick = sideMenuNavHandler
                 ) {
                     MessagesListScreen(appState, navController)
                 }
@@ -106,20 +99,7 @@ fun AppRoot() {
             composable(Screen.Account.route) {
                 AppTopBar(
                     title = "Account",
-                    onMenuItemClick = { item ->
-                        when (item) {
-                            "Home" -> navController.navigate(Screen.Home.route)
-                            "Messages" -> navController.navigate(Screen.Messages.route)
-                            "Account" -> {}
-                            "Settings" -> navController.navigate(Screen.Settings.route)
-                            "Logout" -> {
-                                appState.logout()
-                                navController.navigate(Screen.RoleSelect.route) {
-                                    popUpTo(0)
-                                }
-                            }
-                        }
-                    }
+                    onMenuItemClick = sideMenuNavHandler
                 ) {
                     AccountScreen(appState)
                 }
@@ -128,22 +108,9 @@ fun AppRoot() {
             composable(Screen.Settings.route) {
                 AppTopBar(
                     title = "Settings",
-                    onMenuItemClick = { item ->
-                        when (item) {
-                            "Home" -> navController.navigate(Screen.Home.route)
-                            "Messages" -> navController.navigate(Screen.Messages.route)
-                            "Account" -> navController.navigate(Screen.Account.route)
-                            "Settings" -> {}
-                            "Logout" -> {
-                                appState.logout()
-                                navController.navigate(Screen.RoleSelect.route) {
-                                    popUpTo(0)
-                                }
-                            }
-                        }
-                    }
+                    onMenuItemClick = sideMenuNavHandler
                 ) {
-                    SettingsList()
+                    SettingsList(settingsManager)
                 }
             }
 
@@ -151,20 +118,7 @@ fun AppRoot() {
                 val classId = backStack.arguments?.getString("classId") ?: ""
                 AppTopBar(
                     title = "Differ Request",
-                    onMenuItemClick = { item ->
-                        when (item) {
-                            "Home" -> navController.navigate(Screen.Home.route)
-                            "Messages" -> navController.navigate(Screen.Messages.route)
-                            "Account" -> navController.navigate(Screen.Account.route)
-                            "Settings" -> navController.navigate(Screen.Settings.route)
-                            "Logout" -> {
-                                appState.logout()
-                                navController.navigate(Screen.RoleSelect.route) {
-                                    popUpTo(0)
-                                }
-                            }
-                        }
-                    }
+                    onMenuItemClick = sideMenuNavHandler
                 ) {
                     DeferralRequestPage(appState, classId)
                 }
@@ -174,20 +128,7 @@ fun AppRoot() {
                 val chatId = backStack.arguments?.getString("chatId") ?: ""
                 AppTopBar(
                     title = "Chat",
-                    onMenuItemClick = { item ->
-                        when (item) {
-                            "Home" -> navController.navigate(Screen.Home.route)
-                            "Messages" -> navController.navigate(Screen.Messages.route)
-                            "Account" -> navController.navigate(Screen.Account.route)
-                            "Settings" -> navController.navigate(Screen.Settings.route)
-                            "Logout" -> {
-                                appState.logout()
-                                navController.navigate(Screen.RoleSelect.route) {
-                                    popUpTo(0)
-                                }
-                            }
-                        }
-                    }
+                    onMenuItemClick = sideMenuNavHandler
                 ) {
                     ChatScreen(chatId)
                 }
@@ -195,6 +136,3 @@ fun AppRoot() {
         }
     }
 }
-
-
-
