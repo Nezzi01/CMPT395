@@ -11,15 +11,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,29 +29,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cmpt395.deferralapp.R
+import com.cmpt395.deferralapp.state.SettingsManager
 import com.cmpt395.deferralapp.ui.theme.DeferralAppTheme
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            DeferralAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SettingsList(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
-    }
-}
-
 @Composable
-fun SettingsList(modifier: Modifier = Modifier)
-{
-    var darkModeEnabled by remember { mutableStateOf(false) }
+fun SettingsList(
+    manager: SettingsManager,
+    modifier: Modifier = Modifier
+) {
+    val darkModeEnabled by manager.isDarkModeEnabled.collectAsState(initial = false)
+    val scope = rememberCoroutineScope()
+
     var screenReaderEnabled by remember { mutableStateOf(false) }
     var textScale by remember { mutableFloatStateOf(0.5F) }
     val textScalePercent: Int = (50 + 100 * textScale).roundToInt()
@@ -58,13 +49,15 @@ fun SettingsList(modifier: Modifier = Modifier)
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        //Invoke Nav Bar here...
-
         //Dark Mode toggle
         SettingsToggle(
             labelID = R.string.settings_dark_mode,
             value = darkModeEnabled,
-            onToggle  = {darkModeEnabled = it}
+            onToggle = { isChecked ->
+                scope.launch {
+                    manager.setDarkMode(isChecked)
+                }
+            }
         )
         HorizontalDivider(thickness = 2.dp)
 
@@ -117,10 +110,10 @@ fun SettingsToggle(
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun SettingsPreview() {
     DeferralAppTheme {
-        SettingsList()
+        SettingsList(SettingsManager, false)
     }
-}
+}*/
