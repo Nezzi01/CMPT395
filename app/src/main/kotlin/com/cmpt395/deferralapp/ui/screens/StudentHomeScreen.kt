@@ -10,7 +10,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.cmpt395.deferralapp.state.DeferralAppState
 import com.cmpt395.deferralapp.ui.navigation.Screen
-import com.cmpt395.deferralapp.ui.theme.CardGrey
 
 @Composable
 fun StudentHomeScreen(
@@ -28,7 +27,7 @@ fun StudentHomeScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 6.dp),
-                    colors = CardDefaults.cardColors(containerColor = CardGrey)
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
                 ) {
                     Row(
                         modifier = Modifier.padding(12.dp),
