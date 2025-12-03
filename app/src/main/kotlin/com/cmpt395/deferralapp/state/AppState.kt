@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.cmpt395.deferralapp.model.*
+import com.example.deferalapp.model.ChatThread
 
 class DeferralAppState {
 

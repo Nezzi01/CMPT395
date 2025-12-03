@@ -4,6 +4,13 @@ import androidx.compose.ui.graphics.Color
 
 val Maroon = Color(0xFF800000)
 val Cream = Color(0xFFFFF5E6)
+val LightGrey = Color(0xFFEFEFEF)
+
+val BlackText = Color(0xFF000000)
+val DarkGreyText = Color(0xFF444444)
+
+val White = Color(0xFFFFFFFF)
+val ErrorRed = Color(0xFFB00020)
 
 val theme_light_bg = Color(0xFFffffff)
 val theme_light_onBackground = Color(0xFF000000)

@@ -8,14 +8,17 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = Maroon,
+    onPrimary = Color.White,
     background = theme_dark_bg,
     onBackground = theme_dark_onBackground,
     surface = theme_dark_surface,
     onSurface = theme_dark_onSurface
+
 )
 
 private val LightColorScheme = lightColorScheme(
